@@ -1,0 +1,9 @@
+{% extends "quotes/base.html" %}
+
+{% block content %}
+<h1>До зустрічі!</h1>
+<form method="post" action="{% url 'users:logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+{% endblock %}

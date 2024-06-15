@@ -1,0 +1,37 @@
+{% extends "quotes/base.html" %}
+
+{% block content %}
+<h1>Contribute quote</h1>
+
+{% if messages %}
+{% for message in messages%}
+<div {% if message.tags %} class="alert alert-{{message.tags}}" {% endif %}
+  role="alert">
+  {{message}}
+</div>
+{% endfor %}
+{% endif %}
+
+{% if form.errors %}
+<div class="alert alert-danger" role="alert">
+  {{ form.non_field_errors}}
+</div>
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+  <div class="input-group input-group-sm mb-3">
+      <span class="input-group-text" id="{{ form.quote.id_for_label }}">Quote:</span>
+      {{ form.quote }}
+  </div>
+  <div class="input-group input-group-sm mb-3">
+      <span class="input-group-text" id="{{ form.tags.id_for_label }}">Tags (Separated by commas):</span>
+      {{ form.tags }}
+  </div>
+  <div class="input-group input-group-sm mb-3">
+      <span class="input-group-text" id="{{ form.author.id_for_label }}">Author:</span>
+      {{ form.author }}
+  </div>
+  <button class="btn btn-primary" type="submit">Add quote</button>
+</form>
+{% endblock %}

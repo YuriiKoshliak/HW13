@@ -1,0 +1,25 @@
+{% extends "quotes/base.html" %}
+
+{% block content %}
+<h1>Contribute author</h1>
+
+{% if messages %}
+{% for message in messages%}
+<div {% if message.tags %} class="alert alert-{{message.tags}}" {% endif %} role="alert">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+
+{% if form.errors %}
+<div class="alert alert-danger" role="alert">
+  {{ form.non_field_errors}}
+</div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit">Add author</button>
+  </form>
+{% endblock %}
